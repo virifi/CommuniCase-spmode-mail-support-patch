@@ -1,0 +1,133 @@
+diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali	2012-04-23 16:12:56.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali	2012-04-23 16:12:32.000000000 +0900
+@@ -162,10 +162,6 @@
+ 
+     invoke-static {v0}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;->k(Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;)Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;
+ 
+-    move-result-object v0
+-
+-    invoke-virtual {v0, v1, v2, v3, v4}, Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;->deletePackage(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+-
+     .line 483
+     iget-object v0, p0, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask;->w:Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;
+ 
+@@ -175,9 +171,7 @@
+ 
+     move v7, v6
+ 
+-    invoke-virtual/range {v0 .. v7}, Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;->addPackage(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IZZ)I
+-
+-    move-result v0
++    const/4 v0, 0x1
+ 
+     .line 485
+     packed-switch v0, :pswitch_data_0
+diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali	2012-04-23 16:12:56.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali	2012-04-23 16:12:32.000000000 +0900
+@@ -170,10 +170,7 @@
+ 
+     invoke-direct {v1, v2, v3}, Landroid/content/ComponentName;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+ 
+-    .line 125
+-    invoke-virtual {v0, v1}, Landroid/content/pm/PackageManager;->getComponentEnabledSetting(Landroid/content/ComponentName;)I
+-
+-    move-result v0
++    const/16 v0, 0x1
+ 
+     .line 126
+     packed-switch v0, :pswitch_data_0
+@@ -221,25 +218,7 @@
+ 
+     if-nez v0, :cond_0
+ 
+-    .line 140
+-    new-instance v0, Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;
+-
+-    iget-object v1, p0, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;->u:Landroid/content/Context;
+-
+-    invoke-direct {v0, v1}, Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;-><init>(Landroid/content/Context;)V
+-
+-    iput-object v0, p0, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;->o:Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;
+-
+-    .line 142
+-    iget-object v0, p0, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;->o:Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;
+-
+-    new-instance v1, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$CerrierWapPushUtilityListener;
+-
+-    const/4 v2, 0x0
+-
+-    invoke-direct {v1, p0, v2}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$CerrierWapPushUtilityListener;-><init>(Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$1;)V
+-
+-    invoke-virtual {v0, v1}, Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;->registerListener(Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper$HelperListener;)V
++    nop
+ 
+     .line 147
+     :cond_0
+@@ -260,10 +239,15 @@
+ 
+     invoke-direct {p0, v0}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;->t(Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushTask;)V
+ 
+-    .line 150
+-    iget-object v0, p0, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;->o:Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;
++    new-instance v1, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$CerrierWapPushUtilityListener;
+ 
+-    invoke-virtual {v0}, Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;->connect()Z
++    const/4 v2, 0x0
++
++    invoke-direct {v1, p0, v2}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$CerrierWapPushUtilityListener;-><init>(Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$1;)V
++
++    const/4 v0, 0x1
++
++    invoke-virtual {v1, v0}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$CerrierWapPushUtilityListener;->onConnected(Z)V
+ 
+     goto :goto_0
+ 
+@@ -274,6 +258,17 @@
+     invoke-direct {v0, p0, p1}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddCarrierAccountTask;-><init>(Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;Lcom/nttdocomo/communicase/mail/core/comm/MessagingListener;)V
+ 
+     invoke-direct {p0, v0}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;->t(Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushTask;)V
++
++    new-instance v1, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$CerrierWapPushUtilityListener;
++
++    const/4 v2, 0x0
++
++    invoke-direct {v1, p0, v2}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$CerrierWapPushUtilityListener;-><init>(Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$1;)V
++
++    const/4 v0, 0x1
++
++    invoke-virtual {v1, v0}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$CerrierWapPushUtilityListener;->onConnected(Z)V
++
+     :try_end_0
+     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+ 
+@@ -508,7 +503,7 @@
+ .end method
+ 
+ .method private final m()V
+-    .locals 1
++    .locals 4
+ 
+     .prologue
+     .line 293
+@@ -542,8 +537,6 @@
+     :cond_0
+     iget-object v0, p0, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility;->o:Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;
+ 
+-    invoke-virtual {v0}, Lcom/nttdocomo/android/pf/dcmwappush/DcmWapPushHelper;->disconnect()V
+-
+     .line 305
+     const/4 v0, 0x0
+ 
+@@ -680,9 +673,7 @@
+     invoke-direct {v1, v2, v3}, Landroid/content/ComponentName;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+ 
+     .line 177
+-    invoke-virtual {v0, v1}, Landroid/content/pm/PackageManager;->getComponentEnabledSetting(Landroid/content/ComponentName;)I
+-
+-    move-result v0
++    const/4 v0, 0x1
+ 
+     .line 178
+     packed-switch v0, :pswitch_data_0
