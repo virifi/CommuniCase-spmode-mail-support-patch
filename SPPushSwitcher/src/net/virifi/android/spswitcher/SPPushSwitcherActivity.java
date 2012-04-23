@@ -46,7 +46,8 @@ public class SPPushSwitcherActivity extends Activity {
 			public void onClick(View v) {
 				boolean success = false;
 				try {
-					success = mWapPushManager.updatePackage("36956",
+					deleteBothPackage();
+					success = mWapPushManager.addPackage("36956",
 							"application/vnd.wap.emn+wbxml",
 							"jp.co.nttdocomo.carriermail",
 							"jp.co.nttdocomo.carriermail.SMSService", 1, false,
@@ -70,7 +71,8 @@ public class SPPushSwitcherActivity extends Activity {
 			public void onClick(View v) {
 				boolean success = false;
 				try {
-					success = mWapPushManager.updatePackage("36956",
+					deleteBothPackage();
+					success = mWapPushManager.addPackage("36956",
 							"application/vnd.wap.emn+wbxml",
 							"com.nttdocomo.communicase.carriermail",
 							"com.nttdocomo.communicase.mail.SMSService", 1,
@@ -94,5 +96,20 @@ public class SPPushSwitcherActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		unbindService(mConnection);
+	}
+
+	private void deleteBothPackage() {
+		try {
+			mWapPushManager.deletePackage("36956",
+					"application/vnd.wap.emn+wbxml",
+					"jp.co.nttdocomo.carriermail",
+					"jp.co.nttdocomo.carriermail.SMSService");
+			mWapPushManager.deletePackage("36956",
+					"application/vnd.wap.emn+wbxml",
+					"com.nttdocomo.communicase.carriermail",
+					"com.nttdocomo.communicase.mail.SMSService");
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 	}
 }
