@@ -1,3 +1,17 @@
+diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali	2012-04-23 16:12:56.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali	2012-04-24 11:23:48.000000000 +0900
+@@ -59,6 +59,10 @@
+     .locals 13
+ 
+     .prologue
++    const/4 v0, 0x1
++
++    return v0
++
+     const/4 v11, 0x5
+ 
+     const/4 v10, 0x2
 diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali
 --- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali	2012-04-23 16:12:56.000000000 +0900
 +++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali	2012-04-23 16:12:32.000000000 +0900
