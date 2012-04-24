@@ -1,16 +1,30 @@
 #CommuniCase用spモードメール対応パッチ
 CommuniCaseでspモードメールを使えるようにするパッチと  
-spモードメールをプッシュ受信するために必要なアプリです。
+spモードメールをプッシュ受信するために必要なアプリです。  
+CommuniCase バージョン1.0.0に対応しています。
+
+##更新情報
+wifi経由での送信に対応しました。(2012/4/24)  
+本来wifi接続用パスワードは別のアプリ(com.nttdocomo.android.accountauthenticator)  
+が管理しているのですが、spモードメール非対応端末にはこのアプリが存在しません。  
+そのため、このアプリを用いずにwifi接続用パスワードを管理するために  
+3つのクラスを追加しました。  
+パッチにはこれらのクラスが含まれているのですが  
+処理内容が非常にわかりにくいと思います。  
+そのため、元のjavaファイルをinjected_classesにて公開しておきました。  
+パスワードを扱うデリケートな部分なので  
+処理内容を確認しておくことをオススメします。
+
+##動作確認端末
+Galaxy Nexus
+Galaxy S2
+Xperia ray
 
 ##パッチのあて方
 $ apktool d com.nttdocomo.communicase.carriermail-1.apk  
 $ patch -p0 < spmode-support.patch  
 $ apktool b com.nttdocomo.communicase.carriermail-1 communicase_spmode-support.apk  
 $ jarsigner -keystore hogehoge.key communicase_spmode-support.apk hogehoge  
-
-##パッチの現状の問題点
-wifiパスワードを設定しようとすると落ちます。  
-したがって、wifi経由でメールを送受信することは出来ません。
 
 ##プッシュ通知を受け取るためのアプリ
 SPPushSwitcherとSPModeMailDummyの2つのアプリを提供しています。  

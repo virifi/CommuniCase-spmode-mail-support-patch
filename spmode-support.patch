@@ -1,4 +1,43 @@
-diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali
+diff -urN com.nttdocomo.communicase.carriermail-1/AndroidManifest.xml com.nttdocomo.communicase.carriermail-1_spmode-support/AndroidManifest.xml
+--- com.nttdocomo.communicase.carriermail-1/AndroidManifest.xml	2012-04-23 16:12:54.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/AndroidManifest.xml	2012-04-24 17:27:43.000000000 +0900
+@@ -204,6 +204,8 @@
+             </intent-filter>
+         </receiver>
+         <service android:name="jp.co.nttdocomo.authenticationfunction.AuthService" />
++        <activity android:name="net.virifi.android.spmodemail.SaveWlanPasswordActivity" android:configChanges="keyboardHidden|orientation" />
++        <activity android:name="net.virifi.android.spmodemail.CheckWlanPasswordActivity" android:configChanges="keyboardHidden|orientation" />
+     </application>
+     <supports-screens android:anyDensity="true" android:normalScreens="true" android:largeScreens="true" />
+     <uses-permission android:name="android.permission.VIBRATE" />
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/carriermail/activity/MailActSettingOtherPrefActivity.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/carriermail/activity/MailActSettingOtherPrefActivity.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/carriermail/activity/MailActSettingOtherPrefActivity.smali	2012-04-23 16:12:55.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/carriermail/activity/MailActSettingOtherPrefActivity.smali	2012-04-24 17:41:14.000000000 +0900
+@@ -904,9 +904,9 @@
+     invoke-direct {v0}, Landroid/content/Intent;-><init>()V
+ 
+     .line 275
+-    const-string v1, "com.nttdocomo.android.accountauthenticator"
++    const-string v1, "com.nttdocomo.communicase.carriermail"
+ 
+-    const-string v2, "com.nttdocomo.android.accountauthenticator.DAACheckPasswordActivity"
++    const-string v2, "net.virifi.android.spmodemail.CheckWlanPasswordActivity"
+ 
+     invoke-virtual {v0, v1, v2}, Landroid/content/Intent;->setClassName(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
+ 
+@@ -1177,9 +1177,9 @@
+     invoke-direct {v0}, Landroid/content/Intent;-><init>()V
+ 
+     .line 349
+-    const-string v1, "com.nttdocomo.android.accountauthenticator"
++    const-string v1, "com.nttdocomo.communicase.carriermail"
+ 
+-    const-string v2, "com.nttdocomo.android.accountauthenticator.DAASavePasswordActivity"
++    const-string v2, "net.virifi.android.spmodemail.SaveWlanPasswordActivity"
+ 
+     invoke-virtual {v0, v1, v2}, Landroid/content/Intent;->setClassName(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
+ 
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali
 --- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali	2012-04-23 16:12:56.000000000 +0900
 +++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/carriermail/nexti/NextIChecker.smali	2012-04-24 11:23:48.000000000 +0900
 @@ -59,6 +59,10 @@
@@ -12,7 +51,7 @@ diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase
      const/4 v11, 0x5
  
      const/4 v10, 0x2
-diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali
 --- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali	2012-04-23 16:12:56.000000000 +0900
 +++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility$WapPushAddPackageTask.smali	2012-04-23 16:12:32.000000000 +0900
 @@ -162,10 +162,6 @@
@@ -37,7 +76,7 @@ diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase
  
      .line 485
      packed-switch v0, :pswitch_data_0
-diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali
 --- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali	2012-04-23 16:12:56.000000000 +0900
 +++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWapPushUtility.smali	2012-04-23 16:12:32.000000000 +0900
 @@ -170,10 +170,7 @@
@@ -145,3 +184,569 @@ diff -ur com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase
  
      .line 178
      packed-switch v0, :pswitch_data_0
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWlanUtility.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWlanUtility.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWlanUtility.smali	2012-04-23 16:12:56.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/com/nttdocomo/communicase/mail/core/comm/mail/CarrierWlanUtility.smali	2012-04-24 18:51:46.000000000 +0900
+@@ -495,6 +495,20 @@
+ 
+ 
+ # virtual methods
++.method private getPatchWlanPassword()Ljava/lang/String;
++    .locals 1
++
++    .prologue
++    .line 46
++    iget-object v0, p0, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWlanUtility;->y:Landroid/content/Context;
++
++    invoke-static {v0}, Lnet/virifi/android/spmodemail/WlanPasswordManager;->getWlanPassword(Landroid/content/Context;)Ljava/lang/String;
++
++    move-result-object v0
++
++    return-object v0
++.end method
++
+ .method public getPassword()Ljava/lang/String;
+     .locals 10
+     .annotation system Ldalvik/annotation/Throws;
+@@ -504,6 +518,12 @@
+     .end annotation
+ 
+     .prologue
++    invoke-direct {p0}, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWlanUtility;->getPatchWlanPassword()Ljava/lang/String;
++
++    move-result-object v0
++
++    return-object v0
++
+     const/16 v9, 0xb
+ 
+     const/16 v8, 0xa
+@@ -616,6 +636,8 @@
+     .line 106
+     iget-object v2, p0, Lcom/nttdocomo/communicase/mail/core/comm/mail/CarrierWlanUtility;->u:Lcom/nttdocomo/android/accountauthenticator/DAAGetPassword;
+ 
++    const/4 v2, 0x1
++
+     if-eqz v2, :cond_0
+ 
+     .line 109
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/CheckWlanPasswordActivity$1.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/CheckWlanPasswordActivity$1.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/CheckWlanPasswordActivity$1.smali	1970-01-01 09:00:00.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/CheckWlanPasswordActivity$1.smali	2012-04-24 17:23:46.000000000 +0900
+@@ -0,0 +1,60 @@
++.class Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity$1;
++.super Ljava/lang/Object;
++.source "CheckWlanPasswordActivity.java"
++
++# interfaces
++.implements Landroid/view/View$OnClickListener;
++
++
++# annotations
++.annotation system Ldalvik/annotation/EnclosingMethod;
++    value = Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;->onCreate(Landroid/os/Bundle;)V
++.end annotation
++
++.annotation system Ldalvik/annotation/InnerClass;
++    accessFlags = 0x0
++    name = null
++.end annotation
++
++
++# instance fields
++.field final synthetic this$0:Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;
++
++
++# direct methods
++.method constructor <init>(Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;)V
++    .locals 0
++    .parameter
++
++    .prologue
++    .line 1
++    iput-object p1, p0, Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity$1;->this$0:Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;
++
++    .line 26
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public onClick(Landroid/view/View;)V
++    .locals 2
++    .parameter "v"
++
++    .prologue
++    .line 29
++    iget-object v0, p0, Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity$1;->this$0:Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;
++
++    const/4 v1, -0x1
++
++    invoke-virtual {v0, v1}, Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;->setResult(I)V
++
++    .line 30
++    iget-object v0, p0, Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity$1;->this$0:Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;
++
++    invoke-virtual {v0}, Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;->finish()V
++
++    .line 31
++    return-void
++.end method
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/CheckWlanPasswordActivity.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/CheckWlanPasswordActivity.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/CheckWlanPasswordActivity.smali	1970-01-01 09:00:00.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/CheckWlanPasswordActivity.smali	2012-04-24 17:23:46.000000000 +0900
+@@ -0,0 +1,78 @@
++.class public Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;
++.super Landroid/app/Activity;
++.source "CheckWlanPasswordActivity.java"
++
++
++# direct methods
++.method public constructor <init>()V
++    .locals 0
++
++    .prologue
++    .line 11
++    invoke-direct {p0}, Landroid/app/Activity;-><init>()V
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public onCreate(Landroid/os/Bundle;)V
++    .locals 4
++    .parameter "savedInstanceState"
++
++    .prologue
++    .line 14
++    invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
++
++    .line 16
++    new-instance v1, Landroid/widget/LinearLayout;
++
++    invoke-direct {v1, p0}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
++
++    .line 17
++    .local v1, ll:Landroid/widget/LinearLayout;
++    const/4 v3, 0x1
++
++    invoke-virtual {v1, v3}, Landroid/widget/LinearLayout;->setOrientation(I)V
++
++    .line 18
++    invoke-virtual {p0, v1}, Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;->setContentView(Landroid/view/View;)V
++
++    .line 20
++    new-instance v2, Landroid/widget/TextView;
++
++    invoke-direct {v2, p0}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
++
++    .line 21
++    .local v2, textView:Landroid/widget/TextView;
++    const-string v3, "\u3053\u306e\u30d1\u30c3\u30c1\u3067\u306fwifi\u63a5\u7d9a\u78ba\u8a8d\u3092\u3059\u308b\u3053\u3068\u306f\u51fa\u6765\u307e\u305b\u3093\u3002\u5b9f\u969b\u306b\u30e1\u30fc\u30eb\u3092\u9001\u53d7\u4fe1\u3059\u308b\u3053\u3068\u306b\u3088\u308a\u78ba\u8a8d\u3057\u3066\u304f\u3060\u3055\u3044\u3002"
++
++    invoke-virtual {v2, v3}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
++
++    .line 22
++    invoke-virtual {v1, v2}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
++
++    .line 24
++    new-instance v0, Landroid/widget/Button;
++
++    invoke-direct {v0, p0}, Landroid/widget/Button;-><init>(Landroid/content/Context;)V
++
++    .line 25
++    .local v0, button:Landroid/widget/Button;
++    const-string v3, "OK"
++
++    invoke-virtual {v0, v3}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
++
++    .line 26
++    new-instance v3, Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity$1;
++
++    invoke-direct {v3, p0}, Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity$1;-><init>(Lnet/virifi/android/spmodemail/CheckWlanPasswordActivity;)V
++
++    invoke-virtual {v0, v3}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
++
++    .line 33
++    invoke-virtual {v1, v0}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
++
++    .line 34
++    return-void
++.end method
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity$1.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity$1.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity$1.smali	1970-01-01 09:00:00.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity$1.smali	2012-04-24 17:23:46.000000000 +0900
+@@ -0,0 +1,60 @@
++.class Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$1;
++.super Ljava/lang/Object;
++.source "SaveWlanPasswordActivity.java"
++
++# interfaces
++.implements Landroid/view/View$OnClickListener;
++
++
++# annotations
++.annotation system Ldalvik/annotation/EnclosingMethod;
++    value = Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;->onCreate(Landroid/os/Bundle;)V
++.end annotation
++
++.annotation system Ldalvik/annotation/InnerClass;
++    accessFlags = 0x0
++    name = null
++.end annotation
++
++
++# instance fields
++.field final synthetic this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++
++# direct methods
++.method constructor <init>(Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;)V
++    .locals 0
++    .parameter
++
++    .prologue
++    .line 1
++    iput-object p1, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$1;->this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++    .line 43
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public onClick(Landroid/view/View;)V
++    .locals 2
++    .parameter "v"
++
++    .prologue
++    .line 46
++    iget-object v0, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$1;->this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++    const/4 v1, 0x0
++
++    invoke-virtual {v0, v1}, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;->setResult(I)V
++
++    .line 47
++    iget-object v0, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$1;->this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++    invoke-virtual {v0}, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;->finish()V
++
++    .line 48
++    return-void
++.end method
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity$2.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity$2.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity$2.smali	1970-01-01 09:00:00.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity$2.smali	2012-04-24 17:23:46.000000000 +0900
+@@ -0,0 +1,82 @@
++.class Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;
++.super Ljava/lang/Object;
++.source "SaveWlanPasswordActivity.java"
++
++# interfaces
++.implements Landroid/view/View$OnClickListener;
++
++
++# annotations
++.annotation system Ldalvik/annotation/EnclosingMethod;
++    value = Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;->onCreate(Landroid/os/Bundle;)V
++.end annotation
++
++.annotation system Ldalvik/annotation/InnerClass;
++    accessFlags = 0x0
++    name = null
++.end annotation
++
++
++# instance fields
++.field final synthetic this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++.field private final synthetic val$editText:Landroid/widget/EditText;
++
++
++# direct methods
++.method constructor <init>(Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;Landroid/widget/EditText;)V
++    .locals 0
++    .parameter
++    .parameter
++
++    .prologue
++    .line 1
++    iput-object p1, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;->this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++    iput-object p2, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;->val$editText:Landroid/widget/EditText;
++
++    .line 51
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public onClick(Landroid/view/View;)V
++    .locals 3
++    .parameter "v"
++
++    .prologue
++    .line 54
++    iget-object v1, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;->val$editText:Landroid/widget/EditText;
++
++    invoke-virtual {v1}, Landroid/widget/EditText;->getText()Landroid/text/Editable;
++
++    move-result-object v1
++
++    invoke-interface {v1}, Landroid/text/Editable;->toString()Ljava/lang/String;
++
++    move-result-object v0
++
++    .line 55
++    .local v0, password:Ljava/lang/String;
++    iget-object v1, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;->this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++    invoke-static {v1, v0}, Lnet/virifi/android/spmodemail/WlanPasswordManager;->saveWlanPassword(Landroid/content/Context;Ljava/lang/String;)V
++
++    .line 56
++    iget-object v1, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;->this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++    const/4 v2, -0x1
++
++    invoke-virtual {v1, v2}, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;->setResult(I)V
++
++    .line 57
++    iget-object v1, p0, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;->this$0:Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++
++    invoke-virtual {v1}, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;->finish()V
++
++    .line 58
++    return-void
++.end method
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity.smali	1970-01-01 09:00:00.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/SaveWlanPasswordActivity.smali	2012-04-24 17:23:46.000000000 +0900
+@@ -0,0 +1,134 @@
++.class public Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;
++.super Landroid/app/Activity;
++.source "SaveWlanPasswordActivity.java"
++
++
++# direct methods
++.method public constructor <init>()V
++    .locals 0
++
++    .prologue
++    .line 13
++    invoke-direct {p0}, Landroid/app/Activity;-><init>()V
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public onCreate(Landroid/os/Bundle;)V
++    .locals 7
++    .parameter "savedInstanceState"
++
++    .prologue
++    .line 16
++    invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
++
++    .line 18
++    new-instance v2, Landroid/widget/LinearLayout;
++
++    invoke-direct {v2, p0}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
++
++    .line 19
++    .local v2, ll:Landroid/widget/LinearLayout;
++    const/4 v6, 0x1
++
++    invoke-virtual {v2, v6}, Landroid/widget/LinearLayout;->setOrientation(I)V
++
++    .line 20
++    invoke-virtual {p0, v2}, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;->setContentView(Landroid/view/View;)V
++
++    .line 22
++    new-instance v5, Landroid/widget/TextView;
++
++    invoke-direct {v5, p0}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
++
++    .line 23
++    .local v5, textView:Landroid/widget/TextView;
++    const-string v6, "wifi\u63a5\u7d9a\u7528\u30d1\u30b9\u30ef\u30fc\u30c9"
++
++    invoke-virtual {v5, v6}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
++
++    .line 24
++    invoke-virtual {v2, v5}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
++
++    .line 26
++    new-instance v1, Landroid/widget/EditText;
++
++    invoke-direct {v1, p0}, Landroid/widget/EditText;-><init>(Landroid/content/Context;)V
++
++    .line 27
++    .local v1, editText:Landroid/widget/EditText;
++    invoke-static {p0}, Lnet/virifi/android/spmodemail/WlanPasswordManager;->getWlanPassword(Landroid/content/Context;)Ljava/lang/String;
++
++    move-result-object v6
++
++    invoke-virtual {v1, v6}, Landroid/widget/EditText;->setText(Ljava/lang/CharSequence;)V
++
++    .line 28
++    const/16 v6, 0x81
++
++    invoke-virtual {v1, v6}, Landroid/widget/EditText;->setInputType(I)V
++
++    .line 29
++    invoke-virtual {v2, v1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
++
++    .line 31
++    new-instance v3, Landroid/widget/LinearLayout;
++
++    invoke-direct {v3, p0}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
++
++    .line 32
++    .local v3, ll2:Landroid/widget/LinearLayout;
++    const/4 v6, 0x0
++
++    invoke-virtual {v3, v6}, Landroid/widget/LinearLayout;->setOrientation(I)V
++
++    .line 33
++    invoke-virtual {v2, v3}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
++
++    .line 35
++    new-instance v0, Landroid/widget/Button;
++
++    invoke-direct {v0, p0}, Landroid/widget/Button;-><init>(Landroid/content/Context;)V
++
++    .line 36
++    .local v0, cancelButton:Landroid/widget/Button;
++    const-string v6, "\u30ad\u30e3\u30f3\u30bb\u30eb"
++
++    invoke-virtual {v0, v6}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
++
++    .line 37
++    invoke-virtual {v3, v0}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
++
++    .line 39
++    new-instance v4, Landroid/widget/Button;
++
++    invoke-direct {v4, p0}, Landroid/widget/Button;-><init>(Landroid/content/Context;)V
++
++    .line 40
++    .local v4, saveButton:Landroid/widget/Button;
++    const-string v6, "\u4fdd\u5b58"
++
++    invoke-virtual {v4, v6}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
++
++    .line 41
++    invoke-virtual {v3, v4}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;)V
++
++    .line 43
++    new-instance v6, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$1;
++
++    invoke-direct {v6, p0}, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$1;-><init>(Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;)V
++
++    invoke-virtual {v0, v6}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
++
++    .line 51
++    new-instance v6, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;
++
++    invoke-direct {v6, p0, v1}, Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity$2;-><init>(Lnet/virifi/android/spmodemail/SaveWlanPasswordActivity;Landroid/widget/EditText;)V
++
++    invoke-virtual {v4, v6}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
++
++    .line 60
++    return-void
++.end method
+diff -urN com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/WlanPasswordManager.smali com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/WlanPasswordManager.smali
+--- com.nttdocomo.communicase.carriermail-1/smali/net/virifi/android/spmodemail/WlanPasswordManager.smali	1970-01-01 09:00:00.000000000 +0900
++++ com.nttdocomo.communicase.carriermail-1_spmode-support/smali/net/virifi/android/spmodemail/WlanPasswordManager.smali	2012-04-24 17:23:46.000000000 +0900
+@@ -0,0 +1,82 @@
++.class public Lnet/virifi/android/spmodemail/WlanPasswordManager;
++.super Ljava/lang/Object;
++.source "WlanPasswordManager.java"
++
++
++# static fields
++.field private static final PREF_NAME:Ljava/lang/String; = "spmodemail_auth_info"
++
++.field private static final WLAN_PASS:Ljava/lang/String; = "wlan_password"
++
++
++# direct methods
++.method public constructor <init>()V
++    .locals 0
++
++    .prologue
++    .line 7
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    return-void
++.end method
++
++.method public static getWlanPassword(Landroid/content/Context;)Ljava/lang/String;
++    .locals 3
++    .parameter "context"
++
++    .prologue
++    .line 12
++    const-string v1, "spmodemail_auth_info"
++
++    const/4 v2, 0x0
++
++    invoke-virtual {p0, v1, v2}, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;
++
++    move-result-object v0
++
++    .line 13
++    .local v0, pref:Landroid/content/SharedPreferences;
++    const-string v1, "wlan_password"
++
++    const-string v2, ""
++
++    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
++
++    move-result-object v1
++
++    return-object v1
++.end method
++
++.method public static saveWlanPassword(Landroid/content/Context;Ljava/lang/String;)V
++    .locals 4
++    .parameter "context"
++    .parameter "password"
++
++    .prologue
++    .line 17
++    const-string v2, "spmodemail_auth_info"
++
++    const/4 v3, 0x0
++
++    invoke-virtual {p0, v2, v3}, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;
++
++    move-result-object v1
++
++    .line 18
++    .local v1, pref:Landroid/content/SharedPreferences;
++    invoke-interface {v1}, Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;
++
++    move-result-object v0
++
++    .line 19
++    .local v0, editor:Landroid/content/SharedPreferences$Editor;
++    const-string v2, "wlan_password"
++
++    invoke-interface {v0, v2, p1}, Landroid/content/SharedPreferences$Editor;->putString(Ljava/lang/String;Ljava/lang/String;)Landroid/content/SharedPreferences$Editor;
++
++    .line 20
++    invoke-interface {v0}, Landroid/content/SharedPreferences$Editor;->commit()Z
++
++    .line 21
++    return-void
++.end method
