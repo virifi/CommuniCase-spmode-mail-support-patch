@@ -16,9 +16,7 @@ wifi経由での送信に対応しました。(2012/4/24)
 処理内容を確認しておくことをオススメします。
 
 ##動作確認端末
-Galaxy Nexus
-Galaxy S2
-Xperia ray
+Galaxy Nexus, Galaxy S2, Xperia ray
 
 ##パッチのあて方
 $ apktool d com.nttdocomo.communicase.carriermail-1.apk  
